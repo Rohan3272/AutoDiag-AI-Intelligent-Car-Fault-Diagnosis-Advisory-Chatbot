@@ -54,22 +54,30 @@ For context: random guessing across 41 classes scores **2.4%**.
 
 ---
 
-## Repository structure
+## Files
 
-```
-Part1/    Pipeline notebook, trained model files, knowledge base
-Part2/    Streamlit chatbot app and explanatory chatbot notebook
-Raw/      Raw dataset and knowledge base
-```
+| File | What it is |
+|---|---|
+| `Complete Pipeline AutoDiag.ipynb` | The full workflow: cleaning, EDA, transformation, model building, tuning, evaluation |
+| `AutoDiag_Chatbot.ipynb` | The chatbot explained step by step, showing all three layers |
+| `app.py` | The Streamlit web application |
+| `car_fault_dataset_raw.csv` | The raw dataset, with all 12 data-quality issues intact |
+| `knowledge_base.csv` | 41 faults mapped to causes, precautions, urgency and safe-to-drive status |
+| `tfidf_vectorizer.joblib` | The fitted TF-IDF vectorizer |
+| `fault_classifier.joblib` | The trained Logistic Regression model |
+| `label_encoder.joblib` | Maps class numbers back to fault names |
+| `START_CHATBOT.command` | macOS one-click launcher for the web app |
 
 ---
 
 ## Running it
 
-**1. Install the requirements**
+**1. Clone the repository and install the requirements**
 
 ```bash
-pip install -r Part2/requirements.txt
+git clone https://github.com/Rohan3272/AutoDiag-AI-Intelligent-Car-Fault-Diagnosis-Advisory-Chatbot.git
+cd AutoDiag-AI-Intelligent-Car-Fault-Diagnosis-Advisory-Chatbot
+pip install streamlit groq scikit-learn pandas numpy joblib
 ```
 
 **2. Get a free Groq API key** at [console.groq.com](https://console.groq.com)
@@ -77,7 +85,6 @@ pip install -r Part2/requirements.txt
 **3. Run the web app**
 
 ```bash
-cd Part2
 streamlit run app.py
 ```
 
@@ -85,9 +92,9 @@ Paste your API key into the sidebar, then describe a car problem in the chat box
 
 **4. Or explore the pipeline**
 
-Open `Part1/Complete_Pipeline_AutoDiag.ipynb` to see the full workflow: cleaning, EDA, transformation, model building, tuning, and evaluation.
+Open `Complete Pipeline AutoDiag.ipynb` to see the full workflow from raw messy data through to the trained models.
 
-> **Note:** the pipeline notebook uses absolute file paths. Update the `read_csv` paths at the top to match wherever you have cloned the repository.
+> **Note:** the pipeline notebook reads the dataset using absolute file paths. Update the `read_csv` paths near the top to point at `car_fault_dataset_raw.csv` and `knowledge_base.csv` in your own copy of the repository.
 
 ---
 
@@ -101,4 +108,5 @@ Python · Pandas · NumPy · Scikit-learn · TensorFlow/Keras · Hugging Face Tr
 
 - The dataset is synthetic and would need validation on real workshop data before production use
 - The system works only from what the owner describes, so it cannot detect anything they have not noticed
+- Each message is treated as an independent complaint; conversational follow-up questions are not yet supported
 - It is a triage tool, not a replacement for a mechanic. Every response recommends professional inspection
