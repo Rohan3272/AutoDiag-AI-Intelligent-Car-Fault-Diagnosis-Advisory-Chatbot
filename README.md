@@ -1,4 +1,4 @@
-# AutoDiag AI — Intelligent Car Fault Diagnosis & Advisory Chatbot
+# AutoDiag AI : Intelligent Car Fault Diagnosis & Advisory Chatbot
 
 Describe a car problem in plain language, and this system tells you the most likely fault, how urgent it is, whether the car is safe to drive, and what to do next.
 
